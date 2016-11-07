@@ -1,0 +1,860 @@
+Sage es un sistema de álgebra computacional (CAS, del inglés \emph{computer
+algebra system}).
+El programa es libre, lo que nos permite copiarlo, modificarlo y redistribuirlo
+libremente. Sage consta de un buen número de librerías para ejecutar cálculos
+matemáticos y para generar gráficas. Para llamar a estas libre\-rías se usa el
+lenguaje de programación \texttt{Python}.
+
+{\sage} está desarrollado por el proyecto de software libre
+\href{http://www.sagemath.org/}{Sagemath}. Se encuentra disponible para
+GNU/Linux y MacOS, y para Windows bajo máquina virtual. Reúne y compatibiliza
+bajo una única interfaz y un único entorno, distintos sistemas algebraicos de
+software libre. Permite también integrar otras herramientas de {\itshape
+software de pago}, como Magma, Matlab,  Mathematica o Maple.
+
+Python es un lenguaje de propósito general de muy alto nivel, que permite
+representar conceptos abstractos de forma
+natural y, en general, hacer más con menos código. Buena parte de las librerías
+que componen Sage se pueden usar
+directamente desde Python, sin necesidad de acarrear todo el entorno de Sage.
+
+
+Existen varias formas de interactuar con Sage: desde la consola, desde ciertos
+programas como TeXmacs o Cantor, y desde el \emph{navegador de internet}. Para
+este último uso, Sage crea un \emph{servidor web} que escucha las peticiones del
+cliente (un navegador), realiza los cálculos que le pide el cliente, y le
+devuelve los resultados. 
+En esta asignatura sólo usaremos el interfaz web (\emph{notebook}). 
+
+\section{Iniciar sesión}
+
+\begin{enumerate}
+\item {\sc En una máquina local} (no se necesita conexión a internet)
+ \begin{enumerate}
+  \item de nuestro laboratorio: en el men\'u {\tt ``Aplicaciones/Math/''} clicar
+sobre
+el
+icono Sage, o bien, abrir una terminal (en el men\'u {\tt Aplicaciones/Sistema}) y
+ejecutar
+\begin{lstlisting}[basicstyle=\color{black},
+		backgroundcolor=\color{white},
+		numbers=none,linewidth=.25\textwidth]
+  sage -notebook
+\end{lstlisting}
+
+
+
+\item exterior a nuestro laboratorio: generalmente se ha de instalar previamente
+el software.
+En el sitio
+de \href{http://www.sagemath.org/download.html}{Sagemath}\, se encontrarán las
+instrucciones precisas para cada sistema operativo. Una vez instalado, el inicio
+de sesión será similar al indicado en el punto anterior.
+ 
+ La  manera de instalar {\sage} en una m\'aquina cuyo sistema operativo sea
+MSWindows consiste en instalar una m\'aquina virtual que ejecute Linux y
+contenga una versi\'on de {\sage}. %% Hemos preparado una tal m\'aquina virtual, que puedes descargar de uno de nuestros servidores  siguiendo las instrucciones que encontrar\'as en \href{run:matuam_sage_ova.pdf}{este documento.} %%%
+ 
+ Puedes ver instrucciones detalladas de instalaci\'on, en  MSWindows, 
+en  \href{http://www.sagemath.org/download-windows.html}{este enlace}.
+ 
+ \end{enumerate}
+ 
+ En este caso el programa se ejecuta en la  m\'aquina en la
+que estamos sentados ({\itshape m\'aquina local=localhost}) y el navegador web
+({\itshape Iceweasel}) se conecta a la m\'aquina local mediante la direcci\'on 
+
+\mbox{}\hskip.1\textwidth\url{http://localhost:8080/}.
+
+ 
+ 
+Cuando usamos la m\'aquina local para ejecutar {\sage}, \textbf{admin} es el
+usuario de la sesión
+por defecto, aunque es posible crear otros usuarios, como se explica un poco
+m\'as abajo, usando la p\'agina de entrada a {\sage} en el navegador. Esto puede
+servir para organizar las hojas usando distintas cuentas para los diversos
+temas.
+
+Se ha de tener en cuenta que, {\sc la primera vez que se lanza
+una sesión {\sage}}  hay que hacerlo desde la terminal y el sistema pide crear
+una contraseña para el usuario
+\texttt{admin}. Puesto
+que la máquina a utilizar ya tendrá una seguridad previa, se recomienda una
+palabra sencilla: \emph{holasage}, por ejemplo.
+
+
+\item {\sc En el servidor del Departamento de Matem\'aticas} (se necesita conexión a internet). Al teclear, en un
+navegador, la dirección 
+
+\mbox{}\hskip.1\textwidth\url{https://sage.mat.uam.es/}, 
+
+se nos muestra la siguiente ventana\footnote{La primera vez, el navegador
+nos avisa que estamos intentando acceder a un sitio con seguridad.
+Podemos confiar en él, por tanto basta marcar todas las casillas sobre
+confianza, y aceptar todos los certificados que nos ofrezca.}
+
+\ilustra{SignIn}
+
+El servidor requiere que el usuario esté previamente identificado en el
+sistema. Mientras el uso de nuestro servidor sea razonable, está permitido
+abrir cuentas nuevas. Para ello, utilizar el enlace\footnote{El acceso a este enlace para crear cuentas nuevas ha sido restringido: se puede acceder directamente desde los ordenadores de la Universidad o que utilizen la red {\itshape wifi} (de la UAM), pero desde fuera de la UAM hay que usar el servicio VPN (de la UAM) y disponer de una cuenta de correo electr\'onico (de  la UAM). Informaci\'on sobre c\'omo usar VPN en el 
+	este \href{https://www.uam.es/ss/Satellite/es/1234886352083/1234886351541/servicioti/ServicioTI/Acceso_remoto_a_la_red_de_la_UAM_(El_Atajo).htm}{enlace}}
+
+\mbox{}\hskip.1\textwidth\url{https://sage.mat.uam.es/register}
+
+tras cuya acción se nos pedirá un nombre de usuario (\texttt{Username}) y una
+contraseña (\texttt{Password}). Recomendamos ({\itshape fuertemente}) que
+us\'eis el mismo nombre de usuario y la misma contrase\~na que los de vuestra
+cuenta el Laboratorio.
+
+
+
+Una vez identificados, usaremos estos datos para
+los siguientes inicios de sesión en este servidor. Por supuesto, en este caso,
+el usuario de las páginas será el identificado al inicio de la sesión.
+
+Cuando conectamos el navegador a una dirección remota, es decir, no a {\tt
+localhost}, el c\'odigo de {\sage} se ejecuta en la m\'aquina remota y la
+máquina en la que estemos trabajando \'unicamente ejecutar\'a el navegador. Si
+el servidor tiene que atender peticiones de c\'alculos complicados de muchos
+usuarios simult\'aneamente puede ralentizarse su funcionamiento, o incluso puede colgarse. 
+En consecuencia, no debe utilizarse el servidor del Departamento durante las clases.
+
+\end{enumerate}
+
+
+\section[\emph{The Sage Notebook}]{\emph{The Sage Notebook}\footnotemark}
+
+\footnotetext{La versión de sage utilizada para escribir estas notas es la 5.8.
+Actualmente (2016-17) estamos usando la versi\'on de {\sage} 7.3, y su comportamiento puede variar ligeramente respecto al aqu\'{\i} 
+mencionado.}
+
+Al entrar (\boton{Sign in}) a una sesión de sage, encontramos
+una primera portada en la que se listan todas las hojas de trabajo activas
+(\link{Active Worksheets}). Por supuesto, la
+primera vez esta
+lista está vacía. 
+
+\ilustra{lista_vacia}
+
+
+\label{subir}
+Desde esta portada de nuestro \emph{cuaderno de trabajo} se
+puede: 
+\begin{itemize}
+ \item Navegar hacia cualquiera de las hojas listadas, clicando
+sobre su nombre.
+\item Crear una nueva (\link{New Worksheet}).
+\item \emph{Subir} una hoja (\link{Upload}).
+\label{subir}
+\item Visitar hojas publicadas (\link{Published}).
+\item Ver y recuperar hojas borradas (\link{Trash}). 
+\item \emph{Bajar} una o varias hojas. Se ha de marcar una de la lista y pulsar
+\boton{Download}, o elegir varias y pulsar \link{Download All Active} y se
+descargan en un fichero comprimido en formato {\tt zip}. Un archivo comprimido
+{\tt zip} que contenga hojas de trabajo de {\sage} se puede subir usando el
+mismo procedimiento que para subir una \'unica hoja, lo que nos ahorra el tener
+que subir las hojas individuales. 
+\item Cerrar la sesión iniciada (\link{Sign out}).
+\end{itemize}
+\pagebreak[3]
+
+\noindent\begin{minipage}{1\textwidth}
+\indent Una hoja de trabajo \emph{a estrenar} presenta el siguiente
+aspecto\footnotemark
+
+\ilustra{untitled}
+
+\end{minipage}
+\footnotetext{Las imágenes que se muestran se han capturado utilizando el
+sistema Ubuntu (Precise Pangolin) y la versión 23.0 del navegador
+Mozilla Firefox. El aspecto puede variar respecto al uso en sistemas, versiones,
+configuraciones o navegadores diferentes.}
+\
+
+Al crearla, el programa nos ofrece la posibilidad de bautizarla, ofreciéndonos,
+por defecto, un nombre poco adecuado: \texttt{Untitled}. Este es un buen
+momento
+para personalizarla; aunque siempre se puede cambiar el nombre
+pinchando sobre el mostrado en la zona superior izquierda.
+
+\
+
+\newlength{\indentacion}
+\indentacion=1\parindent
+\def\indentar{\mbox{}\hskip\indentacion }
+
+\subsection*{Cuadros de código}
+
+\noindent\begin{minipage}{1\textwidth}
+\indentar Una vez nombrada, ofrece, bajo un encabezamiento que
+luego trataremos, un solo recuadro rellenable, con una delgada línea roja a su
+izquierda.
+
+\ilustra{hoja_cero}
+\end{minipage}
+
+\noindent\begin{minipage}{1\textwidth}
+\indentar Antes de continuar, aprovechamos para mostrar la misma hoja con otro
+aspecto. Se accede a esta vista pulsando sobre el botón \Boton{Edit}, que
+encontramos en el encabezamiento.
+
+\ilustra{hoja_cero_html}
+\end{minipage}
+
+Se vuelve a la vista anterior pulsando en el botón \Boton{Worksheet}, y
+también sobre \boton{Save Changes} o \boton{Cancel}. Las dos últimas acciones
+son más apropiadas si se ha editado la hoja.
+
+Esta manera de ver la hoja, como texto con un cierto formato, es muy \'util para
+copiar un trozo de una hoja, que contenga un cierto n\'umero de celdas,  y
+pegarlo en otra. \'Unicamente hay que tener en cuenta que hay que copiar las
+celdas completas, desde 
+\verb|{{{| hasta que se cierre con \verb|}}}|, no debe haber celdas con el mismo
+n\'umero de identidad, que aparece despu\'es de \verb|{{{id=| al comienzo de la
+zona que corresponde a la celda.
+
+\noindent\begin{minipage}[b]{.7\textwidth}
+\indentar Esta única celda con la que se inicia una nueva hoja de
+trabajo, la denomi\-naremos \emph{cuadro de código}. En este tipo de celdas
+insertaremos código con una sintaxis adecuada al lenguaje de programación que
+estemos utilizando.
+
+\vskip1\baselineskip El \emph{intérprete} de las líneas de código, se
+elige en el
+último de los desplegables de la zona superior. Por defecto, está activado
+\texttt{sage}. \vskip.25\baselineskip \mbox{}
+\end{minipage}\hfill
+\begin{minipage}[b]{.3\textwidth}
+ \ilustra[.75]{interprete}
+\end{minipage}
+
+\noindent\begin{minipage}{1\textwidth}
+\indentar Para entrar en la edición de un cuadro de código, basta
+situar el cursor sobre él: se lleva el puntero del ratón a cualquier punto del
+interior y se pulsa el botón primario. En en ese momento, la celda se
+\emph{activa}; la presencia del botón \boton{evaluate} nos indicará cuál es la
+celda activa.
+          
+\ilustra{activar_celda}
+\end{minipage}
+
+
+
+\noindent\begin{minipage}{1\textwidth}
+Las instrucciones que insertemos en el cuadro de código activo, serán
+ejecutadas al pulsar el botón \boton{evaluate} o teclear
+\texttt{mayúsculas+Enter}. 
+
+\ilustra{evaluar_celda}
+\end{minipage}
+
+El orden de las celdas de c\'alculo, dentro de una p\'agina, puede ser
+importante. Normalmente las hemos ido evaluando en el orden en el que aparecen
+an la p\'agina y celdas que hemos ejecutado porteriormente pueden cambiar el
+contenido de variables que ten\'{\i}an previamente otro valor. 
+
+Como se puede observar, al evaluar una celda, se crea una nueva.
+También
+desaparece la línea roja del margen, lo que indica que el cuadro de código ha
+sido evaluado. Además, el intérprete nos mostrará, en casi todas las ocasiones,
+alguna señal de su actividad. En este caso, le hemos forzado a hacerlo con la
+orden \lstinline|print|.
+
+\
+
+\pagebreak[3]
+
+\noindent\begin{minipage}{1\textwidth}
+Para crear una nueva celda, podemos:
+\begin{itemize}
+ \item Evaluar el contenido de un cuadro ya existente. La nueva celda se crea
+inmediatamente detrás.
+
+\item Deslizar el puntero del ratón sobre la parte superior del
+cuadro a la vista, hasta que aparezca una línea más gruesa (en color azul, por
+defecto), y clicar el botón primario del ratón. El nuevo cuadro aparecerá por
+encima del utilizado para crearlo.
+
+\ilustra{crear_cuadro}
+
+\item Una acción similar a la anterior crea un nuevo cuadro  bajo uno
+existente.
+Se ha de llevar el puntero algo más abajo del borde inferior; la parte baja
+de la línea roja, de estar visible, sirve de referencia.
+
+\ilustra{crear_nuevo_bajo}
+\end{itemize}
+\end{minipage}
+
+
+\subsection*{Cuadros de texto}
+
+Existe un segundo tipo de contenido en una hoja de trabajo, los \emph{cuadros de
+texto}. Puedes crear un nuevo bloque de texto
+pulsando sobre la línea azul que aparece al pasar el puntero del ratón sobre
+alguno de los bordes de una celda, pero manteniendo pulsada la tecla 
+\verb|mayúsculas|.
+
+\ilustra[.66]{cuadro_texto}
+
+
+Los cuadros de texto nos permiten ilustrar con comentarios, imágenes, enlaces,
+..., una hoja de trabajo. Al entrar en modo de edición, se nos muestra un
+mini--editor ({\itshape wysiwyg})
+de código html, con botones y desplegables para cambiar algunos aspectos del
+estilo del texto. 
+
+\ilustra[.66]{editando}
+
+Si el usuario se encuentra más cómodo, puede editar directamente en html
+(pinchar sobre el icono \icono{html}). Además, se puede incluir código \LaTeX,
+ver
+p\'agina~\pageref{latex}, 
+de manera que \$\$%
+\lstinline[language={[LaTeX]TeX}]|\[\lim_{N\to\infty}\sum_{k=1}^N\frac1k=\infty\]| %
+se mostrará, al guardar (\boton{Save changes}) como:
+\[\lim_{N\to\infty}\sum_{k=1}^N\frac1k=\infty.\]
+
+
+Si haces doble clic sobre cualquier punto de un cuadro de texto con contenido,
+puedes editar el contenido. Utilizaremos estos cuadros de texto, para ilustrar
+nuestras hojas de trabajo. 
+
+
+\subsection*{El encabezamiento}
+
+En la parte superior de toda hoja de trabajo, encontramos un par de regiones:
+\begin{itemize}
+ \item Una fija y común a todas las hojas del usuario %
+ (\textbf{\small\lstinline|admin|} en el ejemplo) 
+
+ \ilustra{cabecera}
+con casillas activas, que realizan diferentes acciones globales de navegación:
+\begin{itemize}
+ \item \link{Toggle}, oculta/muestra la cabecera de la hoja;
+ \item \link{Home}, vuelve a la portada, con la lista de hojas;
+ \item \link{Published}, navega a la lista de hojas publicadas;
+ \item \link{Log}, muestra un histórico de los últimos cambios realizados por
+el usuario;
+\item \link{Settings}, para cambiar configuraciones de usuarios, del
+\emph{notebook} o de la cuenta activa. Algunas solo las puede realizar el
+administrador del sitio. En cualquier caso, no es recomendable hacer cambios
+por usuarios no avanzados o no autorizados.
+\item \link{Help}, enlaza, de estar instalada, a la documentación (en inglés).
+Incluye un manual del Notebook y un tutorial de Sage.
+\item \link{Report a Problem}, para avisar de posibles errores al equipo de
+sagemath. Se recomienda estar en uso de la última versión de Sage, pues el
+problema puede estar ya resuelto.
+\item \link{Sign out}, cierra la sesión. Se vuelve a la ventana de
+entrada.\footnote{En ocasiones el navegador no muestra la ventana de entrada,
+sino la portada (\link{Home}) del cuaderno del usuario. Este es un problema de
+la caché del navegador, basta vaciarla usando el enlace en el men\'u {\tt
+``Editar/Preferencias/''} del navegador. En cualquier caso, no es preocupante
+pues pasado un tiempo de inactividad, el sistema desconecta al usuario.}
+Si estamos ejecutando en una máquina local, conviene cerrar la ventana del
+intérprete, situándonos sobre ella y presionando \verb|Ctrl+C|.
+\end{itemize}
+
+
+
+\item Y una cabecera propia de la hoja, 
+
+\ilustra{subcabecera}
+con acciones sobre la misma, todas autoexplicativas. Mostramos, por ejemplo,
+las de los desplegables:
+\newcommand{\imagitem}[2]{\item
+\raisebox{.5\baselineskip}{\raisebox{-#1\textheight}{
+\makebox[1\width][l]
+	{\includegraphics[height=#1\textheight]{Desplegable#2.png}%
+}}}}
+
+\noindent\begin{minipage}{.45\textwidth}
+\begin{itemize}
+ \imagitem{.075}{File}
+
+ \imagitem{.1}{Action}
+\end{itemize}
+ \end{minipage}\hfill
+\begin{minipage}{.45\textwidth}
+\begin{itemize} 
+ \imagitem{.035}{Data}
+ 
+ \imagitem{.15}{Interprete}
+\end{itemize}
+\end{minipage}
+
+\subsection*{Incluir archivos en hojas}
+En ocasiones queremos guardar una imagen o un archivo de datos dentro de una
+hoja, de forma que cuando pasemos la hoja a otra persona disponga de todos los
+archivos necesarios para los c\'alculos que se realizan en la hoja. 
+\begin{itemize}
+\renewcommand{\labelitemi}{$\circ$}
+ \item Si tenemos la imagen a la vista, en el navegador, podemos guardarla en
+nuestro sistema de archivos pinchando sobre ella con el botón derecho del
+ratón. En el menú que se despliega, aparecerá una opción del tipo
+\link[black]{Guardar imagen como...} En lo que sigue, presuponemos que la hemos
+guardado con nombre \verb|Dado.png|.
+
+\item Para subir la imagen y que pueda viajar con \verb|`Hoja Cero'|, tenemos
+la acción \verb|Upload or create file...| %
+del desplegable \verb|Data...| en el encabezamiento de la hoja.
+
+\item El botón \boton{Examinar...} nos servirá para elegir la imagen. Una vez
+elegida, clicaremos sobre 
+\boton{Upload or Create Data File}.
+
+\item De la siguiente ventana, podemos olvidarnos por el momento. Basta volver
+a la hoja (\Boton{Worksheet}), para seguir con la edición. Abrimos un cuadro de
+texto, mecanografiamos el texto y añadimos la imagen, en la zona pedida,
+clicando sobre el icono para insertar imagenes de la barra de herramientas del
+editor y rellenando con los siguientes datos:
+
+\ilustra[.25]{InsertaDado}
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+\end{itemize}
+
+\section{Notación}
+
+En estas notas, representaremos los cuadros de código por una
+\begin{center}
+\colorbox{LightYellow}{caja con fondo de color}.
+\end{center}
+ En ocasiones aparecerán
+numeradas las líneas de código,  en la parte exterior de la caja. Esta
+numeración no es parte del código y aparece para facilitar la referencia a l\'{\i}neas individuales.
+Además, las palabras clave del lenguaje de programación aparecerán resaltadas, 
+para distinguirlas de las demás. Las respuestas del intérprete, 
+en caso de querer mostrarlas, aparecerán indentadas, y en otro color, bajo las
+cajas 
+con el código.
+
+Así, por ejemplo, trascribiremos la celda
+
+\ilustra{SumaImpares}
+\noindent con alguno de los siguientes aspectos
+\footnotesize
+\begin{itemize}
+ \item numerado
+\codigo[numbers=left,linerange=1-3]{SumaImpares}
+\item sin numerar
+\codigo[numbers=none,linerange=1-3]{SumaImpares}
+\item con la respuesta del intérprete
+\CodigoOut{SumaImpares}{1}{3}{4}
+\end{itemize}
+\normalsize
+Cuando copiamos c\'odigo desde este PDF a una celda de {\sage} podemos encontrarnos con errores de sintaxis debidos simplemente a que en la celda se entienden algunos caracteres,  que estaban en el PDF,  de forma incompatible con las reglas sint\'acticas de {\sage}. Un ejemplo t\'{\i}pico aparece con el gui\'on que usamos para la resta, que al pegarlo en la celda aparece como un gui\'on largo, que {\sage} no interpreta como el s\'{\i}mbolo de la resta. 
+
+\begin{appendices}
+\chapter{Uso de este documento}
+
+Hemos preparado estas notas  con la intenci\'on de que faciliten el
+mantenimiento organizado de toda la informaci\'on que genera el curso.
+Pueden cambiar un poco a lo largo del curso, ya que corregimos las erratas, y errores, que se detecten, y a\~nadiremos nuevas secciones o temas  si nos parece \'util.
+Por otra parte, tambi\'en pretendemos que sigan creciendo en cursos sucesivos
+aunque entonces ser\'a probablemente imposible cubrir todo el material y habr\'a
+que seleccionar. 
+
+\begin{enumerate}
+
+\item Encontrar\'as una carpeta \verb|SAGE-noteb| en el escritorio de tu cuenta
+en el Laboratorio. Esta carpeta contendr\'a  los materiales que os vayamos
+dando, y, por tanto, su contenido puede variar de una semana a
+otra. Se recomienda mantener  una copia actualizada de esta carpeta en un {\itshape pendrive}. 
+
+\item En cada examen encontrar\'as una copia de la carpeta \verb|SAGE-noteb|,
+tal como estaba en tu cuenta habitual justo antes del examen, en el escritorio
+de la cuenta en la que debes hacer el examen. Esto quiere decir que puedes
+colocar archivos que quieres ver durante el examen en ciertas subcarpetas, se
+concreta un poco m\'as adelante,  de la carpeta \verb|SAGE-noteb|.
+
+
+\item El documento b\'asico es este, \verb|laboratorio.pdf|, que tiene un
+mont\'on de
+enlaces a otras p\'aginas del documento,  a p\'aginas {\itshape web} y a otros
+documentos, lecturas opcionales, que est\'an situados en la carpeta \verb|PDFs|
+dentro de la que contiene todo el material. Se trata entonces de un documento
+\emph{navegable.}
+
+{\sc Recomendamos} abrirlo con el visor de PDFs {\tt evince} tambi\'en llamado
+{\itshape Visor de documentos}.
+
+
+\item {\sc Enlaces:} navegamos en el documento y fuera de \'el usando diversos tipos de enlaces:
+\begin{enumerate}
+\item Por ejemplo, este es un \href{http://150.244.21.37/PDFs/INTRO/ltxprimer-1.0.pdf}{enlace a
+un documento PDF} situado 
+en uno de nuestros servidores y  debe abrirse en el navegador que usamos por defecto, mientras que este otro es un 
+\href{http://www.sagemath.org/}{enlace a una p\'agina web} externa.
+
+
+
+\item Tambi\'en hay \hyperref[prologo]{enlaces a otras zonas de este mismo documento}. Podemos recuparar la p\'agina en la que est\'abamos usando el bot\'on {\itshape Back} (la flecha hacia la izquierda) en {\tt evince}.
+
+\item Por \'ultimo, hay \href{http://sage.mat.uam.es:8888/home/pub/0/}{enlaces} que nos llevan directamente a hojas de trabajo
+de {\sage} que, como hemos visto se abren dentro del navegador (en nuestro caso
+\verb|Iceweasel|). Estos enlaces a hojas de trabajo permiten ver las hojas pero
+no
+modificarlas o ejecutarlas. Sin embargo, tienen un enlace ({\itshape Download})
+en la parte de arriba
+que permite descargarlas en nuestro ordenador, y, una vez descargadas,  podemos
+\hyperref[subir]{subirlas} a nuestra copia local de {\sage}.  
+
+\end{enumerate}
+\item El programa {\itshape Visor de documentos} ({\tt evince}), como otros programas para leer PDFs, tiene varias funciones muy \'utiles:
+\begin{enumerate}
+	\item {\sc B\'usqueda:} permite buscar dentro del documento una palabra o grupo de palabras. Se muestra como el icono de una {\itshape lupa}.
+	\item {\sc Anotaci\'on:} es posible a\~nadir notas (parecidas a {\itshape Postit}s) al documento. Esta no es la manera correcta de personalizar el documento, la forma correcta se explica en el siguiente apartado,  que est\'a en vuestra cuenta del Laboratorio ya que cuando los profesores lo cambiemos por una versi\'on m\'as reciente se pierden las notas. Sin embargo, sirve para personalizar una copia del documento que resida en vuestro ordenador personal. 
+	
+	Aparece como un icono con una {\itshape hoja de papel y un l\'apiz encima.} 
+	
+	\item {\sc Recuperar la p\'agina anterior:} despu\'es de usar un enlace a otra zona del mismo documento se puede volver a la p\'agina en la
+	que est\'abamos usando el bot\'on {\itshape Back} (la flecha hacia la izquierda) en {\tt evince}.
+\end{enumerate}
+
+
+Seg\'un la versi\'on de {\tt evince} que estemos usando es posible que no aparezcan directamente estos botones, en cuyo caso hay que instalarlos usando el men\'u {\tt Edit/Toolbar}. En la versi\'on de {\tt evince} instalada en el Laboratorio intentaremos que todo esto funcione sin problema.
+
+
+
+
+
+\item Puedes a\~nadir tus propias notas para completar o clarificar el contenido
+de nuestro documento. Es importante entonces tener en cuenta
+que puedes, y debes,  {\emph personalizar} nuestro \verb|laboratorio.pdf| con
+tus
+aportaciones o las de tus compa\~neros.  Para esto
+
+
+\begin{enumerate}
+ \item Para cada cap\'{\i}tulo, por ejemplo el $4$,  hay un documento, en la
+carpeta \verb|SAGE-noteb/INPUTS/NOTAS|, con nombre \verb|notas-cap4.tex| en el
+que puedes escribir y no desaparecer\'a cuando modifiquemos la carpeta. Si
+escribes en cualquiera
+de los otros documentos a la semana siguiente puede haber desaparecido  lo que
+hayas
+a\~nadido.
+
+\item En esos documentos  \verb|notas-capn.tex| se puede escribir texto simple, 
+pero para obtener un m\'{\i}nimo de legibilidad hay que escribir en \LaTeX, que
+no es sino texto formateado,  como se explica en el ap\'endice siguiente. 
+
+\end{enumerate}
+
+\item Las hojas de trabajo de {\sage} que hayas creado o modificado  y quieras
+ver durante  un examen debes guardarlas, ver
+p\'agina \pageref{subir},  en la subcarpeta \verb|SWS-mios| dentro de
+\verb|SAGE-noteb|. Con las hojas ``oficiales''  del curso no es necesario hacer
+esto porque estar\'an disponibles durante los ex\'amenes mediante enlaces en el
+documento \verb|laboratorio.pdf|.
+
+\item Como se explica en la p\'agina \pageref{subir}, hay una manera r\'apida de
+descargar todas las hojas que uno quiera en un \'unico archivo comprimido {\tt
+zip} y luego subir el zip, las hojas que contiene, a otra copia de {\sage}. Esta
+es la manera recomendada, ya que es la m\'as r\'apida,  de transferir nuestras
+hojas a la copia de {\sage} que se usa durante los ex\'amenes.
+
+\item Conviene mantener la informaci\'on acerca de nuestras hojas de
+{\sage}, las que hayamos elaborado o modificado nosotros,  de manera que sea
+f\'acilmente accesible durante los ex\'amenes: por ejemplo, para una hoja que se
+refiere al Cap\'{\i}tulo $4$ de estas notas podr\'{\i}as incluir en el archivo
+\verb|notas-cap4.tex| un \verb|\item| indicando el nombre y
+localizaci\'on del archivo, deber\'{\i}a estar en la subcarpeta \verb|SWS-mios|
+de la
+carpeta principal,  y una descripci\'on  de su contenido. Esto es
+importante  para facilitar la b\'usqueda de una hoja concreta sobre la que
+quiz\'a trabajamos hace cuatro meses y de la que podemos haber olvidado casi
+todo.  
+
+
+
+\item En el ap\'endice {\bf B} se describe la manera de generar enlaces de
+nuestro PDF, \verb|laboratorio.pdf|, a p\'aginas {\itshape web},  a otros
+documentos PDF o a hojas de trabajo de {\sage}. 
+
+
+
+
+
+
+
+
+
+
+\end{enumerate}
+
+
+\chapter{{\LaTeX} b\'asico}
+\label{latex}
+
+\begin{enumerate}
+ 
+ \item Aunque este peque\~no resumen puede servir para escribir en {\LaTeX} las
+notas que quer\'ais a\~nadir al texto, una introducci\'on bastante completa y
+clara se puede encontrar en este 
+ \href{http://150.244.21.37/PDFs/INTRO/ltxprimer-1.0.pdf}{enlace}.
+ 
+ \item Como editor de {\LaTeX}  usamos el programa \verb|texstudio|
+  que est\'a instalado en las m\'aquinas del Laboratorio. 
+  
+  Una vez que hemos abierto el programa, su lanzador est\'a en
+el men\'u {\itshape Aplicaciones/Oficina/}, debemos abrir, usando el bot\'on
+{\itshape Open}, los archivos con c\'odigo {\LaTeX} que vamos a editar.
+  
+  
+  
+  
+  \item Siempre hay que abrir, dentro de \verb|texstudio|,  el archivo
+\begin{center}
+  \verb|SAGE-noteb/laboratorio.tex| 
+ \end{center}
+  
+\noindent que es el documento ra\'{\i}z y el que hay que
+procesar para obtener el \verb|PDF|. Se procesa pinchando en el bot\'on
+\verb|Build&view|, el bot\'on con dos puntas de flecha verdes  en la barra superior de   \verb|texstudio|. El \verb|PDF| resultante aparece en el lado derecho de la ventana.  
+
+\item Los documentos \verb|notas-capn.tex|, que est\'an en la subcarpeta
+\verb|INPUTS/NOTAS/| de la carpeta principal, inicialmente contienen 
+\'unicamente 
+\begin{verbatim}
+\begin{enumerate}
+ \item 
+\end{enumerate}
+\end{verbatim}
+\noindent que es un entorno de listas numeradas. Debes abrirlos en el editor,
+usando el men\'u \verb|Open|, para a\~nadirles materia.
+
+\item Las l\'{\i}neas, dentro de un documento de c\'odigo \LaTeX, que comienzan
+con un \% son comentarios que no aparecen en el PDF resultante.  As\'{\i}, por
+ejemplo, para ver en el PDF uno de los archivos 
+\verb|notas-capn.tex| que has editado, por ejemplo el \verb|notas-cap2.tex|, 
+debes quitar el s\'{\i}mbolo \% al comienzo de dos  l\'{\i}neas en
+\verb|SAGE-noteb/laboratorio.tex| cuyo contenido~es
+\begin{verbatim}
+%\section{Notas personales}
+%\montan|notas-cap2|
+\end{verbatim}
+
+
+\item Cada nota que quieras incluir debe comenzar con un nuevo \verb|\item| y a
+continuaci\'on el texto que quieras. 
+
+\item Para escribir matem\'aticas dentro de una l\'{\i}nea de texto  basta
+escribir el c\'odigo adecuado entre s\'{\i}mbolos de d\'olar (\$..\$). 
+Para escribir matem\'aticas en \emph{display}, es decir ocupando las f\'ormulas
+toda la l\'{\i}nea se puede encerrar el c\'odigo entre dobles d\'olares 
+(\$\$..\$\$), o, mucho mejor, abrir la zona de c\'odigo con \verb|\[| y 
+cerrarla con \verb|\]|. 
+
+\item Por ejemplo, podemos mostrar una ecuaci\'on cuadr\'atica en \emph{display}
+mediante
+\begin{verbatim}
+ \[ax^2+bx+c=0\]
+ \end{verbatim}
+ \noindent que produce 
+ \[ax^2+bx+c=0\]
+ \noindent y su soluci\'on mediante 
+ \begin{verbatim}
+ \[ x=\frac{-b\pm \sqrt{b^2-4ac}}{2a}\]
+ \end{verbatim}
+\noindent que ahora produce 
+
+\[ x=\frac{-b\pm \sqrt{b^2-4ac}}{2a}.\]
+
+\item Si observas con cuidado el c\'odigo {\LaTeX}  anterior ver\'as que la
+forma
+en que se escribe el c\'odigo coincide bastante con la forma en que leemos
+la expresi\'on. Una diferencia es que ante ciertos
+operadores con dos argumentos, como la fracci\'on que tiene numerador y
+denominador, debemos avisar a {\LaTeX}  de que debe esperar dos argumentos
+mientras
+que cuando leemos la f\'ormula hasta que no llegamos a \verb|partido por 2a| no
+sabemos que se trata de una fracci\'on. 
+
+Esto es lo que hace que aprender a escribir c\'odigo {\LaTeX} sea muy sencillo
+para personas acostumbradas a leer texto matem\'atico. 
+
+\item Para cambiar de p\'arrafo en \LaTeX\ basta dejar una l\'{\i}nea
+completamente en blanco. 
+
+\item Los sub\'{\i}ndices se consiguen con la barra baja, \verb|x_n| da $x_n$, 
+y los super\'{\i}ndices con el acento circunflejo, \verb|x^n| da $x^n$.
+
+\item Como se ve en el ejemplo anterior,  \verb|\frac{numerador}{denominador}|
+es
+la forma de obtener una fracci\'on.
+
+\item Conjuntos:
+\begin{enumerate}
+\item \$\lstinline[language={[LaTeX]TeX}]|A\times B|\$ 
+%\verb|$A\times B$|
+produce $A\times B$.
+\item \$\lstinline[language={[LaTeX]TeX}]|A\cap B|\$ 
+%\verb|$A\cap B$|
+produce $A\cap B$.
+\item \$\lstinline[language={[LaTeX]TeX}]|A\cup B|\$ 
+%\verb|$A\cup B$|
+produce $A\cup B$.
+\item \$\lstinline[language={[LaTeX]TeX}]|a\in B|\$ 
+%\verb|$A\in B$|
+produce $a\in B$.
+\item \$\lstinline[language={[LaTeX]TeX}]|a\notin B|\$ 
+%\verb|$A\notin B$|
+produce $a\notin B$.
+\item \$\lstinline[language={[LaTeX]TeX}]|A\subset B|\$ 
+%\verb|$A\subset B$|
+produce $A\subset B$.
+\item \$\lstinline[language={[LaTeX]TeX}]|A\to B|\$ 
+%\verb|$A\to B$|
+produce $A\to B$.
+\item \$\lstinline[language={[LaTeX]TeX}]|a\mapsto f(a)|\$ 
+%\verb|$a\mapsto f(a)$| 
+produce $a\mapsto f(a)$.
+
+\item \$\lstinline|A=\{a,b,c\}|\$
+%\verb|$A=\{a,b,c\}$| 
+produce $A=\{a,b,c\}$.
+\end{enumerate}
+
+\item C\'alculo:
+\begin{enumerate}
+\item \verb|\[\lim_{x\to \infty} f(x)=a\]| produce \[\lim_{x\to \infty}
+f(x)=a.\]
+\item \verb|\[\lim_{h\to 0} \frac{f(x+h)-f(x)}{h}=:f^{\prime}(x)\]| produce 
+ \[\lim_{h\to 0} \frac{f(x+h)-f(x)}{h}=:f^{\prime}(x).\]
+\item \verb|\[\sum_{i=0}^{i=\infty}\frac{x^n}{n!}=:e^x\]| produce
+\[\sum_{i=0}^{i=\infty}\frac{x^n}{n!}=:e^x.\]
+\item \verb|\[\int_a^b f(x)dx\]| produce 
+\[\int_a^b f(x)dx.\]
+
+\end{enumerate}
+\item Tambi\'en es conveniente saber componer matrices. Por ejemplo, 
+
+\begin{lstlisting}[language={[LaTeX]TeX}]
+\begin{equation}
+\begin{pmatrix}
+    1&0&0\\
+    0&1&0\\
+    0&0&1
+\end{pmatrix}
+\end{equation}
+\end{lstlisting}
+\noindent produce la matriz identidad 
+\begin{equation}
+\begin{pmatrix}
+    1&0&0\\
+    0&1&0\\
+    0&0&1
+\end{pmatrix}
+\end{equation}
+\item Puedes encontrar una lista m\'as completa de los c\'odigos que producen
+diversos s\'{\i}mbolos matem\'aticos en este
+\href{http://150.244.21.37/PDFs/INTRO/short-math-guide.pdf}{archivo}, mientras que la lista
+completa, que es enorme, se encuentra en
+\href{http://150.244.21.37/PDFs/INTRO/symbols-a4.pdf}{este otro}.
+\item Podemos cambiar el color de un trozo de texto en el PDF sin m\'as que
+incluir el correspondiente texto, en el archivo con el c\'odigo \LaTeX,  entre
+llaves indicando el color en la forma
+{\tt\lstinline[language={[LaTeX]TeX}]|{\color{green}...texto...}|}, %
+que ver\'{\i}amos como {\color{green}...texto...}. 
+
+%%\pagebreak[3]
+
+
+\item Para incluir en el PDF un enlace a otra zona del mismo documento 
+\begin{enumerate}
+ \item En la zona a la que queremos que lleve el enlace debemos incluir una
+l\'{\i}nea con el contenido 
+ \verb=\label{nombre}=, donde {\tt nombre} es el nombre arbitrario que damos al
+enlace y que no debe ser igual a ning\'un otro  {\itshape label} en el
+documento.
+ \item Donde queremos que aparezca el enlace usamos
+\verb|\hyperref[nombre]{texto}|, con {\tt nombre} el del enlace de acuerdo al
+punto
+anterior, y {\tt texto} el que queramos que aparezca como enlace, es decir
+coloreado, y que pinchamos para movernos al otro lugar en el documento.
+ \end{enumerate}
+
+Si incluyes enlaces de estos en la copia de la carpeta \verb|SAGE-noteb| en el
+ordenador del Laboratorio, y que lleven a zonas del PDF fuera de tus notas
+personales, {\itshape esos enlaces desaparecer\'an cuando actualicemos} la
+carpeta.
+
+
+\item Para incluir en el PDF resultante un enlace a una p\'agina \emph{web}
+basta escribir, en el lugar adecuado del texto, algo como 
+\begin{center}
+\verb|\href{http://...URL...}{enlace}|, 
+\end{center}
+\noindent donde \verb|...URL...| es la direcci\'on
+completa de la p\'agina y \verb|enlace| es el texto que va a aparecer en el PDF
+como el enlace pinchable.
+
+\item Para incluir en el PDF un enlace a otro PDF, por ejemplo situado en la
+subcarpeta \verb|PDFs-mios| de la carpeta \verb|SAGE-noteb|, basta escribir, en
+el
+lugar adecuado del texto, algo como 
+\begin{center}
+\verb|\href{run:PDFs-mios/<nombre del PDF>.pdf}{enlace}|.
+\end{center}
+
+El contenido de esta carpeta \verb|PDFs-mios| no desaparecer\'a al actualizar
+la carpeta \verb|SAGE-noteb|.
+
+\item En este archivo \verb|laboratorio.pdf| hay tambi\'en enlaces que llevan
+directamente a hojas de trabajo de SAGE. En las secciones de notas personales
+puedes 
+incluir esa clase de enlaces mediante el siguiente proceso:
+\begin{enumerate}
+ \item Debes tener una cuenta en nuestro servidor 
+ 
+ \mbox{}\hskip.1\textwidth\url{https://sage.mat.uam.es/},
+ 
+ \noindent y desde dentro de una hoja de {\sage} a la que quieras crear un
+enlace debes publicar la hoja pinchando en el bot\'on {\itshape ``Publish''}, el
+\'ultimo por la derecha en la tercera l\'{\i}nea de la p\'agina. Una hoja
+publicada puede ser vista por cualquiera que acceda al servidor, ni siquiera 
+hace falta tener una cuenta. 
+\item El proceso de publicar una hoja le asigna un n\'umero entero {\tt x}  que
+puede verse, por ejemplo,  pinchando en el enlace {\itshape ``published''} que
+aparece al lado del nombre del usuario en la segunda columna de hojas en la
+p\'agina de entrada a tu cuenta. 
+ 
+ \item Ahora podemos crear el enlace en nuestro documento {\LaTeX} mediante 
+ \small
+ \begin{center}
+ \begin{verbatim}
+ ... \href{http://sage.mat.uam.es:8888/home/pub/x/}}{nombre_del_enlace} ...
+ \end{verbatim}
+ \end{center}
+ \normalsize
+ \noindent con {\tt x} el entero mencionado en el punto anterior.
+\end{enumerate}
+
+
+
+
+\end{enumerate}
+
+
+
+
+\end{appendices}
+
+
+
+
+
+
+
+
