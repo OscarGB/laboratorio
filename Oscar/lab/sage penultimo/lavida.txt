@@ -1,0 +1,18 @@
+def col(A):
+    return A[:,A.pivots()];
+    
+def nul(A):
+    r=A.rank();
+    n=A.ncols();
+    EA=A.echelon_form();
+    C=EA[[0..r-1],:];
+    T=C[:,A.nonpivots()].stack(-identity_matrix(n-r));
+    P=identity_matrix(n)[:,A.pivots()+A.nonpivots()]
+    return P*T;
+
+----------------
+
+A = matrix(QQ,[[1,2,2,4,5],[0,5,5,8,4],[8,4,4,2,1]]);
+show(A);
+show(col(A));
+show(nul(A));
